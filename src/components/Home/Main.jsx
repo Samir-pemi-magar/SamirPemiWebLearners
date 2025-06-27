@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { setLocalStorage, getLocalStorage, ResetLocalStorage } from './LocalStorageManagement';
+import { setLocalStorage, getLocalStorage, ResetLocalStorage } from '../../Store/LocalStorageManagement';
 
 const timeData = [
     "Asia/Kathmandu",

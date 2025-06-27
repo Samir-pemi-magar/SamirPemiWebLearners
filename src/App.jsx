@@ -1,17 +1,12 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Main from './components/main';
-import Navbar from './components/Navbar';
-import AllNew from './components/allnew';
+import NavBar from "./components/NavBar/Navbar";
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/allnew" element={<AllNew />} />
-      </Routes>
-    </Router>
+    <>
+      <NavBar />
+      <Outlet />
+    </>
   );
 }
 
