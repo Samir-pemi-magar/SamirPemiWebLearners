@@ -76,7 +76,7 @@ export default function Signin() {
                     )}
                     <p className="mt-2">
                         Already have an account?{" "}
-                        <Link to="/login" className="text-blue-900 hover:underline">
+                        <Link to="/" className="text-blue-900 hover:underline">
                             Log-in
                         </Link>
                     </p>
