@@ -22,9 +22,11 @@ export default function Login() {
         const result = await res.json();
         console.log(result);
         if (!res.ok) {
+            localStorage.setItem("isLoggedIn", true);
             alert(result.message || "something went wrong");
         }
         else {
+
             navigate("/main");
         }
 

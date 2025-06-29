@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { setLocalStorage, getLocalStorage, ResetLocalStorage } from '../../Store/LocalStorageManagement';
+import { useNavigate } from "react-router-dom";
 
 const timeData = [
     "Asia/Kathmandu",
@@ -44,6 +45,17 @@ export default function Main() {
     const [time, setTime] = useState("");
     const [zone, setZone] = useState("Asia/kathmandu");
     const [savedData, setSavedData] = useState();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const Check = localStorage.getItem('isLoggedIn');
+        if (!Check) {
+            navigate("/");
+        }
+        else {
+            console.log("welcome to homepage");
+        }
+    })
 
     useEffect(() => {
         const data = getLocalStorage();
