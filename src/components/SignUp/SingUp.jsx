@@ -9,9 +9,29 @@ export default function Signin() {
         formState: { errors },
     } = useForm();
 
-    const onSubmit = (data) => {
-        console.log(data);
-        navigate("/");
+    const onSubmit = async (data) => {
+        try {
+            const res = await fetch("api/auth/register", {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            const result = await res.json();
+            console.log(result);
+            if (!res.ok) {
+                alert(result.message || "something went wrong");
+            }
+            else {
+                navigate("/main");
+            }
+
+        } catch (e) {
+            console.log(e.message);
+        }
+
 
     };
 
@@ -29,17 +49,17 @@ export default function Signin() {
                 </div>
 
                 <div className="flex flex-col gap-2 w-full">
-                    <label htmlFor="username" className="font-semibold">
+                    <label htmlFor="name" className="font-semibold">
                         Username:
                     </label>
                     <input
-                        id="username"
+                        id="name"
                         type="text"
                         placeholder="Enter your username"
                         className="w-full p-3 bg-white border outline-none rounded-md"
-                        {...register("username", { required: true })}
+                        {...register("name", { required: true })}
                     />
-                    {errors.username && (
+                    {errors.name && (
                         <span className="text-red-600 text-sm">Username is required</span>
                     )}
                 </div>
@@ -87,7 +107,7 @@ export default function Signin() {
                         type="submit"
                         className="bg-amber-300 w-1/3 p-2 rounded-md cursor-pointer hover:bg-amber-400 duration-300 ease-in-out transition"
                     >
-                        Sign-In
+                        Sign-Up
                     </button>
                 </div>
             </form>

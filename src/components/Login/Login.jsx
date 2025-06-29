@@ -10,9 +10,24 @@ export default function Login() {
         formState: { errors },
     } = useForm();
 
-    const onSubmit = (data) => {
-        console.log(data);
-        navigate("/main");
+    const onSubmit = async (data) => {
+        const res = await fetch("api/auth/login", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        const result = await res.json();
+        console.log(result);
+        if (!res.ok) {
+            alert(result.message || "something went wrong");
+        }
+        else {
+            navigate("/main");
+        }
+
 
     };
 
@@ -29,17 +44,17 @@ export default function Login() {
                     </h4>
                 </div>
                 <div className="flex flex-col gap-2 w-full">
-                    <label htmlFor="username" className="font-semibold">
+                    <label htmlFor="email" className="font-semibold">
                         Email Address:
                     </label>
                     <input
                         type="email"
                         placeholder="enter your email address"
                         className="w-full p-3 bg-white border outline-none rounded-md"
-                        {...register("username", { required: true })}
+                        {...register("email", { required: true })}
                     />
-                    {errors.username && (
-                        <span className="text-red-600 text-sm">username is required</span>
+                    {errors.email && (
+                        <span className="text-red-600 text-sm">email is required</span>
                     )}
                 </div>
                 <div className="w-full">
